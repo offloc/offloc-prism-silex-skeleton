@@ -1,0 +1,36 @@
+{
+    "name": "offloc/router-api-controllers",
+    "type": "library",
+    "description": "Provides the API Controllers for the Offloc router",
+    "homepage": "https://github.com/offloc/offloc-router-api-controllers",
+    "keywords": ["offloc", "router", "short", "url", "api", "controller provider"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Offloc Incorporated",
+            "email": "info@offloc.com",
+            "homepage": "http://offloc.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "silex/silex": "1.*"
+    },
+    "require-dev": {
+        "symfony/browser-kit": "2.1.*",
+        "symfony/css-selector": "2.1.*",
+        "symfony/dom-crawler": "2.1.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Offloc\\Router\\WebApp\\Api": "src",
+            "Offloc\\Router": "../offloc-router-core/src",
+            "Doctrine\\Common": "../offloc-router-core/vendor/doctrine/common/lib"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
