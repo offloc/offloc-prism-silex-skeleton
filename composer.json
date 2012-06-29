@@ -12,9 +12,16 @@
             "homepage": "http://offloc.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git://github.com/offloc/offloc-router-core.git"
+        }
+    ],
     "require": {
         "php": ">=5.3.2",
-        "silex/silex": "1.*"
+        "silex/silex": "1.*",
+        "offloc/router-core": "1.*"
     },
     "require-dev": {
         "symfony/browser-kit": "2.1.*",
@@ -23,9 +30,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Offloc\\Router\\WebApp\\Api": "src",
-            "Offloc\\Router": "../offloc-router-core/src",
-            "Doctrine\\Common": "../offloc-router-core/vendor/doctrine/common/lib"
+            "Offloc\\Router\\WebApp\\Api": "src"
         }
     },
     "extra": {
