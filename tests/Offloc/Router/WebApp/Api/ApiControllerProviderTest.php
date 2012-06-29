@@ -42,32 +42,34 @@ class ApiControllerProviderTest extends WebTestCase
         return $app;
     }
 
+    protected function normalizeJsonResponse($response)
+    {
+        return array($response, json_decode($response->getContent(), true));
+    }
+
     protected function makeRootRequest($client)
     {
-        $crawler = $client->request('GET', '/');
-        $response = $client->getResponse();
+        $client->request('GET', '/');
 
-        return array($response, json_decode($response->getContent(), true));
+        return $this->normalizeJsonResponse($client->getResponse());
     }
 
     protected function traverseToAuthRoot($client)
     {
         list ($response, $json) = $this->makeRootRequest($client);
 
-        $crawler = $client->request('GET', $json['auth']);
-        $response = $client->getResponse();
+        $client->request('GET', $json['auth']);
 
-        return array($response, json_decode($response->getContent(), true));
+        return $this->normalizeJsonResponse($client->getResponse());
     }
 
     protected function traverseToRouteRoot($client)
     {
         list ($response, $json) = $this->makeRootRequest($client);
 
-        $crawler = $client->request('GET', $json['route']);
-        $response = $client->getResponse();
+        $client->request('GET', $json['route']);
 
-        return array($response, json_decode($response->getContent(), true));
+        return $this->normalizeJsonResponse($client->getResponse());
     }
 
     public function testRoot()
@@ -102,7 +104,7 @@ class ApiControllerProviderTest extends WebTestCase
 
         list($response, $json) = $this->traverseToAuthRoot($client);
 
-        $crawler = $client->request('POST', $json['authenticate']);
+        $client->request('POST', $json['authenticate']);
         $response = $client->getResponse();
 
         $json = json_decode($response->getContent(), true);
@@ -155,7 +157,7 @@ class ApiControllerProviderTest extends WebTestCase
 
         list($response, $json) = $this->traverseToRouteRoot($client);
 
-        $crawler = $client->request('POST', $json['find'], array('id' => $route->id()));
+        $client->request('POST', $json['find'], array('id' => $route->id()));
         $response = $client->getResponse();
 
         $json = json_decode($response->getContent(), true);
@@ -165,7 +167,7 @@ class ApiControllerProviderTest extends WebTestCase
         $this->assertEquals('offloc_router_api_route_find', $json['type']);
         $this->assertArrayHasKey('link', $json);
 
-        $crawler = $client->request('GET', $json['link']);
+        $client->request('GET', $json['link']);
         $response = $client->getResponse();
 
         $json = json_decode($response->getContent(), true);
@@ -232,7 +234,7 @@ class ApiControllerProviderTest extends WebTestCase
             'headers' => $route->headers(),
         ));
 
-        $crawler = $client->request('POST', $json['create'], array(), array(), $server, $body);
+        $client->request('POST', $json['create'], array(), array(), $server, $body);
         $response = $client->getResponse();
 
         $json = json_decode($response->getContent(), true);
@@ -242,7 +244,7 @@ class ApiControllerProviderTest extends WebTestCase
         $this->assertEquals('offloc_router_api_route_create', $json['type']);
         $this->assertArrayHasKey('link', $json);
 
-        $crawler = $client->request('GET', $json['link']);
+        $client->request('GET', $json['link']);
         $response = $client->getResponse();
 
         $json = json_decode($response->getContent(), true);

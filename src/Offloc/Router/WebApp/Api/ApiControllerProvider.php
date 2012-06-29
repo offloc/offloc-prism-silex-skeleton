@@ -35,7 +35,6 @@ class ApiControllerProvider implements ControllerProviderInterface
                 'auth' => $app['url_generator']->generate('offloc_router_api_auth_root'),
                 'route' => $app['url_generator']->generate('offloc_router_api_route_root'),
                 'service' => $app['url_generator']->generate('offloc_router_api_service_root'),
-                //'foo' => $app['url_generator']->generate('foo'),
             ));
         })->bind('offloc_router_api_root');
 
