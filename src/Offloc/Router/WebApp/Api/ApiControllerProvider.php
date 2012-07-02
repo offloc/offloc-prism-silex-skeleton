@@ -60,8 +60,8 @@ class ApiControllerProvider implements ControllerProviderInterface
         })->bind('offloc_router_api_route_root');
 
         $controllers->post('/route/routes', function(Request $request) use ($app) {
+            $service = $app['offloc.router.requestAuthenticator']->authenticate($request);
             $routeFactory = $app['offloc.router.domain.model.route.routeFactory'];
-            $service = $app['offloc.router.authenticatedService'];
 
             try {
                 $routeInput = json_decode($request->getContent(), true);

@@ -16,12 +16,17 @@
         {
             "type": "git",
             "url": "git://github.com/offloc/offloc-router-core.git"
+        },
+        {
+            "type": "git",
+            "url": "git://github.com/offloc/offloc-router-api-common.git"
         }
     ],
     "require": {
         "php": ">=5.3.2",
         "silex/silex": "1.*",
-        "offloc/router-core": "1.*"
+        "offloc/router-core": "1.*",
+        "offloc/router-api-common": "1.*"
     },
     "require-dev": {
         "symfony/browser-kit": "2.1.*",

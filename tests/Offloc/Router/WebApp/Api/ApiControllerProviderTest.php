@@ -129,7 +129,7 @@ class ApiControllerProviderTest extends WebTestCase
 
     public function testRouteFindSuccess()
     {
-        $this->app['offloc.router.authenticatedService'] = $service = new \Offloc\Router\Domain\Model\Service\Service(
+        $service = new \Offloc\Router\Domain\Model\Service\Service(
             'service key',
             'Some Service',
             'http://service.com'
@@ -180,11 +180,20 @@ class ApiControllerProviderTest extends WebTestCase
 
     public function testRouteCreateSuccess()
     {
-        $this->app['offloc.router.authenticatedService'] = $service = new \Offloc\Router\Domain\Model\Service\Service(
+        $service = new \Offloc\Router\Domain\Model\Service\Service(
             'service key',
             'Some Service',
             'http://service.com'
         );
+
+        $this->app['offloc.router.requestAuthenticator'] = $this
+            ->getMockBuilder('Offloc\Router\WebApp\Api\RequestAuthenticator')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->app['offloc.router.requestAuthenticator']
+            ->expects($this->once())
+            ->method('authenticate')
+            ->will($this->returnValue($service));
 
         $route = new \Offloc\Router\Domain\Model\Route\Route(
             $service,
