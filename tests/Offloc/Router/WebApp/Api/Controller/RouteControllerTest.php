@@ -9,111 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Offloc\Router\WebApp\Api;
+namespace Offloc\Router\WebApp\Api\Controller;
 
-use Offloc\Router\WebApp\Api\ApiControllerProvider;
-use Silex\Application;
-use Silex\Provider;
-use Silex\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Tests the API Controller Provider
+ * Tests the Route API Controller
  *
  * @author Beau Simensen <beau@dflydev.com>
  */
-class ApiControllerProviderTest extends WebTestCase
+class RouteControllerTest extends AbstractControllerTest
 {
     /**
-     * {@inheritdoc}
+     * Test route root
      */
-    public function createApplication()
-    {
-        $app = new Application;
-
-        $app['debug'] = true;
-
-        unset($app['exception_handler']);
-
-        $app->register(new Provider\UrlGeneratorServiceProvider);
-
-        $app->mount('/', new ApiControllerProvider);
-
-        return $app;
-    }
-
-    protected function normalizeJsonResponse($response)
-    {
-        return array($response, json_decode($response->getContent(), true));
-    }
-
-    protected function makeRootRequest($client)
-    {
-        $client->request('GET', '/');
-
-        return $this->normalizeJsonResponse($client->getResponse());
-    }
-
-    protected function traverseToAuthRoot($client)
-    {
-        list ($response, $json) = $this->makeRootRequest($client);
-
-        $client->request('GET', $json['auth']);
-
-        return $this->normalizeJsonResponse($client->getResponse());
-    }
-
-    protected function traverseToRouteRoot($client)
-    {
-        list ($response, $json) = $this->makeRootRequest($client);
-
-        $client->request('GET', $json['route']);
-
-        return $this->normalizeJsonResponse($client->getResponse());
-    }
-
-    public function testRoot()
-    {
-        $client = $this->createClient();
-
-        list($response, $json) = $this->makeRootRequest($client);
-
-        $this->assertTrue($response->isOk());
-        $this->assertEquals('application/json', $response->headers->get('content-type'));
-        $this->assertEquals('offloc_router_api_root', $json['type']);
-        $this->assertArrayHasKey('auth', $json);
-        $this->assertArrayHasKey('service', $json);
-        $this->assertArrayHasKey('route', $json);
-    }
-
-    public function testAuthRoot()
-    {
-        $client = $this->createClient();
-
-        list($response, $json) = $this->traverseToAuthRoot($client);
-
-        $this->assertTrue($response->isOk());
-        $this->assertEquals('application/json', $response->headers->get('content-type'));
-        $this->assertEquals('offloc_router_api_auth', $json['type']);
-        $this->assertArrayHasKey('authenticate', $json);
-    }
-
-    public function testAuthAuthenticateSuccess()
-    {
-        $client = $this->createClient();
-
-        list($response, $json) = $this->traverseToAuthRoot($client);
-
-        $client->request('POST', $json['authenticate']);
-        $response = $client->getResponse();
-
-        $json = json_decode($response->getContent(), true);
-
-        $this->assertTrue($response->isOk());
-        $this->assertEquals('application/json', $response->headers->get('content-type'));
-        $this->assertEquals('offloc_router_api_auth_authenticate', $json['type']);
-    }
-
     public function testRouteRoot()
     {
         $client = $this->createClient();
@@ -122,11 +31,14 @@ class ApiControllerProviderTest extends WebTestCase
 
         $this->assertTrue($response->isOk());
         $this->assertEquals('application/json', $response->headers->get('content-type'));
-        $this->assertEquals('offloc_router_api_route', $json['type']);
+        $this->assertEquals('offloc_router_api_route_root', $json['type']);
         $this->assertArrayHasKey('create', $json);
         $this->assertArrayHasKey('find', $json);
     }
 
+    /**
+     * Test find (success)
+     */
     public function testRouteFindSuccess()
     {
         $service = new \Offloc\Router\Domain\Model\Service\Service(
@@ -178,6 +90,9 @@ class ApiControllerProviderTest extends WebTestCase
         $this->assertArrayHasKey('link', $json['service']);
     }
 
+    /**
+     * Test create (success)
+     */
     public function testRouteCreateSuccess()
     {
         $service = new \Offloc\Router\Domain\Model\Service\Service(
@@ -228,7 +143,6 @@ class ApiControllerProviderTest extends WebTestCase
             ->method('find')
             ->with($this->equalTo($route->id()))
             ->will($this->returnValue($route));
-
 
         $client = $this->createClient();
 

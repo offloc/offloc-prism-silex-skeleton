@@ -22,103 +22,75 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ApiControllerProvider implements ControllerProviderInterface
 {
+    const ROUTE_ROOT = 'offloc_router_api_root';
+    const ROUTE_AUTH_ROOT = 'offloc_router_api_auth_root';
+    const ROUTE_AUTH_AUTHENTICATE = 'offloc_router_api_auth_authenticate';
+    const ROUTE_ROUTE_ROOT = 'offloc_router_api_route_root';
+    const ROUTE_ROUTE_CREATE = 'offloc_router_api_route_create';
+    const ROUTE_ROUTE_FIND = 'offloc_router_api_route_find';
+    const ROUTE_ROUTE_DETAIL = 'offloc_router_api_route_detail';
+    const ROUTE_SERVICE_ROOT = 'offloc_router_api_service_root';
+    const ROUTE_SERVICE_CREATE = 'offloc_router_api_service_create';
+    const ROUTE_SERVICE_DETAIL = 'offloc_router_api_service_detail';
+
     /**
      * {@inheritdoc}
      */
     public function connect(Application $app)
     {
+        $app['offloc.router.webapp.api.controller.rootController'] = $app->share(function() use ($app) {
+            return new Controller\RootController($app);
+        });
+
+        $app['offloc.router.webapp.api.controller.authController'] = $app->share(function() use ($app) {
+            return new Controller\AuthController($app);
+        });
+
+        $app['offloc.router.webapp.api.controller.routeController'] = $app->share(function() use ($app) {
+            return new Controller\RouteController($app);
+        });
+
+        $app['offloc.router.webapp.api.controller.serviceController'] = $app->share(function() use ($app) {
+            return new Controller\ServiceController($app);
+        });
+
         $controllers = $app['controllers_factory'];
 
         $controllers->get('/', function() use ($app) {
-            return $app->json(array(
-                'type' => 'offloc_router_api_root',
-                'auth' => $app['url_generator']->generate('offloc_router_api_auth_root'),
-                'route' => $app['url_generator']->generate('offloc_router_api_route_root'),
-                'service' => $app['url_generator']->generate('offloc_router_api_service_root'),
-            ));
-        })->bind('offloc_router_api_root');
+            return $app['offloc.router.webapp.api.controller.rootController']->rootAction();
+        })->bind(self::ROUTE_ROOT);
 
         $controllers->get('/auth', function() use ($app) {
-            return $app->json(array(
-                'type' => 'offloc_router_api_auth',
-                'authenticate' => $app['url_generator']->generate('offloc_router_api_auth_authenticate'),
-            ));
-        })->bind('offloc_router_api_auth_root');
+            return $app['offloc.router.webapp.api.controller.authController']->rootAction();
+        })->bind(self::ROUTE_AUTH_ROOT);
 
-        $controllers->post('/auth/authenticate', function() use ($app) {
-            return $app->json(array(
-                'type' => 'offloc_router_api_auth_authenticate',
-            ));
-        })->bind('offloc_router_api_auth_authenticate');
+        $controllers->post('/auth/authenticate', function(Request $request) use ($app) {
+            return $app['offloc.router.webapp.api.controller.authController']->authenticateAction($request);
+        })->bind(self::ROUTE_AUTH_AUTHENTICATE);
 
         $controllers->get('/route', function() use ($app) {
-            return $app->json(array(
-                'type' => 'offloc_router_api_route',
-                'create' => $app['url_generator']->generate('offloc_router_api_route_create'),
-                'find' => $app['url_generator']->generate('offloc_router_api_route_find'),
-            ));
+            return $app['offloc.router.webapp.api.controller.routeController']->rootAction();
         })->bind('offloc_router_api_route_root');
 
         $controllers->post('/route/routes', function(Request $request) use ($app) {
-            $service = $app['offloc.router.requestAuthenticator']->authenticate($request);
-            $routeFactory = $app['offloc.router.domain.model.route.routeFactory'];
-
-            try {
-                $routeInput = json_decode($request->getContent(), true);
-
-                $target = $routeInput['target'];
-                $name = $routeInput['name'];
-                $id = $routeInput['id'];
-                $headers = $routeInput['headers'];
-
-                $route = $routeFactory->create($service, $target, $name, $id, $headers);
-
-                return $app->json(array(
-                    'type' => 'offloc_router_api_route_create',
-                    'link' => $app['url_generator']->generate('offloc_router_api_route_detail', array('routeId' => $route->id())),
-                ));
-            } catch (\Exception $e) {
-                return $app->json(array(
-                    'type' => 'error',
-                    'message' => $e->getMessage(),
-                ), 501);
-            }
-        })->bind('offloc_router_api_route_create');
+            return $app['offloc.router.webapp.api.controller.routeController']->createAction($request);
+        })->bind(self::ROUTE_ROUTE_CREATE);
 
         $controllers->post('/route/find', function(Request $request) use ($app) {
-            $routeRepository = $app['offloc.router.domain.model.route.routeRepository'];
-            $route = $routeRepository->find($request->request->get('id'));
-
-            return $app->json(array(
-                'type' => 'offloc_router_api_route_find',
-                'link' => $app['url_generator']->generate('offloc_router_api_route_detail', array('routeId' => $route->id())),
-            ));
-        })->bind('offloc_router_api_route_find');
+            return $app['offloc.router.webapp.api.controller.routeController']->findAction($request);
+        })->bind(self::ROUTE_ROUTE_FIND);
 
         $controllers->get('/route/routes/{routeId}', function(Request $request, $routeId) use ($app) {
-            $routeRepository = $app['offloc.router.domain.model.route.routeRepository'];
-            $route = $routeRepository->find($routeId);
+            return $app['offloc.router.webapp.api.controller.routeController']->detailAction($request, $routeId);
+        })->bind(self::ROUTE_ROUTE_DETAIL);
 
-            return $app->json(array(
-                'type' => 'offloc_router_api_route_detail',
-                'link' => $app['url_generator']->generate('offloc_router_api_route_detail', array('routeId' => $route->id())),
-                'id' => $route->id(),
-                'target' => $route->target(),
-                'name' => $route->name(),
-                'headers' => $route->headers(),
-                'service' => array(
-                    'link' => $app['url_generator']->generate('offloc_router_api_service_detail', array('serviceKey' => $route->service()->key(), ))
-                )
-            ));
-        })->bind('offloc_router_api_route_detail');
+        $controllers->get('/service', function(Request $request) use ($app) {
+            return $app['offloc.router.webapp.api.controller.serviceController']->rootAction($request);
+        })->bind(self::ROUTE_SERVICE_ROOT);
 
-        $controllers->get('/service', function() use ($app) {
-
-        })->bind('offloc_router_api_service_root');
-
-        $controllers->get('/service/services/{serviceKey}', function($serviceKey) use ($app) {
-
-        })->bind('offloc_router_api_service_detail');
+        $controllers->get('/service/services/{serviceKey}', function(Request $request, $serviceKey) use ($app) {
+            return $app['offloc.router.webapp.api.controller.serviceController']->detailAction($request, $serviceKey);
+        })->bind(self::ROUTE_SERVICE_DETAIL);
 
         return $controllers;
     }
