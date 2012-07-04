@@ -71,4 +71,13 @@ abstract class AbstractControllerTest extends WebTestCase
 
         return $this->normalizeJsonResponse($client->getResponse());
     }
+
+    protected function traverseToServiceRoot($client)
+    {
+        list ($response, $json) = $this->makeRootRequest($client);
+
+        $client->request('GET', $json['service']);
+
+        return $this->normalizeJsonResponse($client->getResponse());
+    }
 }

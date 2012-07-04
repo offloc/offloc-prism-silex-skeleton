@@ -31,6 +31,7 @@ class ApiControllerProvider implements ControllerProviderInterface
     const ROUTE_ROUTE_DETAIL = 'offloc_router_api_route_detail';
     const ROUTE_SERVICE_ROOT = 'offloc_router_api_service_root';
     const ROUTE_SERVICE_CREATE = 'offloc_router_api_service_create';
+    const ROUTE_SERVICE_FIND = 'offloc_router_api_service_find';
     const ROUTE_SERVICE_DETAIL = 'offloc_router_api_service_detail';
 
     /**
@@ -87,6 +88,14 @@ class ApiControllerProvider implements ControllerProviderInterface
         $controllers->get('/service', function(Request $request) use ($app) {
             return $app['offloc.router.webapp.api.controller.serviceController']->rootAction($request);
         })->bind(self::ROUTE_SERVICE_ROOT);
+
+        $controllers->post('/service/services', function(Request $request, $serviceKey) use ($app) {
+            return $app['offloc.router.webapp.api.controller.serviceController']->createAction($request, $serviceKey);
+        })->bind(self::ROUTE_SERVICE_CREATE);
+
+        $controllers->post('/service/find', function(Request $request) use ($app) {
+            return $app['offloc.router.webapp.api.controller.serviceController']->findAction($request);
+        })->bind(self::ROUTE_SERVICE_FIND);
 
         $controllers->get('/service/services/{serviceKey}', function(Request $request, $serviceKey) use ($app) {
             return $app['offloc.router.webapp.api.controller.serviceController']->detailAction($request, $serviceKey);

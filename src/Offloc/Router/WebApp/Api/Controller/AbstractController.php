@@ -49,11 +49,11 @@ abstract class AbstractController
         $service = $this->authenticate($request);
 
         if (null === $service) {
-            throw new \Exception("Authentication requred");
+            throw new \Exception("Authentication required");
         }
 
         if (!$service->active()) {
-            throw new \Exception("Authentication requred, authenticated service is inactive");
+            throw new \Exception("Authentication required, authenticated service is inactive");
         }
 
         return $service;

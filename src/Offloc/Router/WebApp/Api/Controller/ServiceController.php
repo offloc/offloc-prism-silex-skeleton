@@ -11,6 +11,7 @@
 
 namespace Offloc\Router\WebApp\Api\Controller;
 
+use Offloc\Router\WebApp\Api\ApiControllerProvider;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -28,7 +29,26 @@ class ServiceController extends AbstractController
     public function rootAction()
     {
         return $this->app->json(array(
-            'type' => 'offloc_router_api_service_root',
+            'type' => 'service_root',
+            'create' => $this->generateUrl(ApiControllerProvider::ROUTE_SERVICE_CREATE),
+            'find' => $this->generateUrl(ApiControllerProvider::ROUTE_SERVICE_FIND),
+        ));
+    }
+
+    /**
+     * Find action
+     *
+     * @param Request $request Request
+     *
+     * @return string
+     */
+    public function findAction(Request $request)
+    {
+        $service = $this->serviceRepository()->find($request->request->get('key'));
+
+        return $this->app->json(array(
+            'type' => 'service_link',
+            'link' => $this->generateServiceUrl($service),
         ));
     }
 
