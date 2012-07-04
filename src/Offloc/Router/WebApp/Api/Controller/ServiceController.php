@@ -66,7 +66,7 @@ class ServiceController extends AbstractController
         $service = $this->serviceRepository()->find($serviceKey);
 
         return $this->app->json(array(
-            'type' => 'offloc_router_api_service_detail',
+            'type' => 'service_detail',
             'link' => $this->generateServiceUrl($service),
             'key' => $service->key(),
             'name' => $service->name(),

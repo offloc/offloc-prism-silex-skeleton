@@ -84,7 +84,7 @@ class AuthControllerTest extends AbstractControllerTest
 
         $this->assertTrue($response->isOk());
         $this->assertEquals('application/json', $response->headers->get('content-type'));
-        $this->assertEquals('offloc_router_api_service_detail', $json['type']);
+        $this->assertEquals('service_detail', $json['type']);
         $this->assertEquals('service key', $json['key']);
     }
 }

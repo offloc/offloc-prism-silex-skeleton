@@ -82,6 +82,7 @@ class ServiceControllerTest extends AbstractControllerTest
         $response = $client->getResponse();
 
         $json = json_decode($response->getContent(), true);
+        $this->assertEquals('service_detail', $json['type']);
         $this->assertEquals('some key', $json['key']);
         $this->assertEquals('Some Name', $json['name']);
         $this->assertEquals('http://example.com', $json['url']);
