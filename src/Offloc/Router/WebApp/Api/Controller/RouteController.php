@@ -57,6 +57,10 @@ class RouteController extends AbstractController
 
             $route = $this->routeFactory()->create($service, $target, $name, $id, $headers);
 
+            $this->routeRepository()->store($route);
+
+            $this->session()->flush();
+
             $routeLink = $this->generateRouteUrl($route);
 
             return $this->app->json(array(

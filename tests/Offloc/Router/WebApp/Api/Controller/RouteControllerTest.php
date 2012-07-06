@@ -148,6 +148,17 @@ class RouteControllerTest extends AbstractControllerTest
             ->method('find')
             ->with($this->equalTo($route->id()))
             ->will($this->returnValue($route));
+        $this->app['offloc.router.domain.model.route.routeRepository']
+            ->expects($this->once())
+            ->method('store')
+            ->will($this->returnSelf());
+
+        $this->app['offloc.router.domain.model.session'] = $this
+            ->getMock('Offloc\Router\Domain\Model\SessionInterface');
+        $this->app['offloc.router.domain.model.session']
+            ->expects($this->once())
+            ->method('flush')
+            ->will($this->returnSelf());
 
         $client = $this->createClient();
 

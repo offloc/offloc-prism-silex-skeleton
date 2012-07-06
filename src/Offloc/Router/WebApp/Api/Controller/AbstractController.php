@@ -74,6 +74,11 @@ abstract class AbstractController
         return $this->generateUrl(ApiControllerProvider::ROUTE_SERVICE_DETAIL, array('serviceKey' => $service->key(), ));
     }
 
+    protected function session()
+    {
+        return $this->app['offloc.router.domain.model.session'];
+    }
+
     protected function routeFactory()
     {
         return $this->app['offloc.router.domain.model.route.routeFactory'];
