@@ -11,6 +11,7 @@
 
 namespace Offloc\Router\WebApp\Api\Controller;
 
+use Offloc\Router\Api\Common\Message;
 use Offloc\Router\WebApp\Api\ApiControllerProvider;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -29,7 +30,7 @@ class AuthController extends AbstractController
     public function rootAction()
     {
         return $this->app->json(array(
-            'type' => 'offloc_router_api_auth_root',
+            'type' => Message::TYPE_AUTH_ROOT,
             'authenticate' => $this->generateUrl(ApiControllerProvider::ROUTE_AUTH_AUTHENTICATE),
         ));
     }
@@ -45,9 +46,11 @@ class AuthController extends AbstractController
     {
         $service = $this->requireAuthentication($request);
 
+        $serviceLink = $this->generateServiceUrl($service);
+
         return $this->app->json(array(
-            'type' => 'offloc_router_api_auth_authenticate',
-            'link' => $this->generateServiceUrl($service),
-        ));
+            'type' => Message::TYPE_SERVICE_LINK,
+            'link' => $serviceLink,
+        ), 303, array('Location' => $serviceLink,));
     }
 }

@@ -11,6 +11,8 @@
 
 namespace Offloc\Router\WebApp\Api\Controller;
 
+use Offloc\Router\Api\Common\Message;
+
 /**
  * Tests the Root API Controller
  *
@@ -26,7 +28,7 @@ class RootControllerTest extends AbstractControllerTest
 
         $this->assertTrue($response->isOk());
         $this->assertEquals('application/json', $response->headers->get('content-type'));
-        $this->assertEquals('offloc_router_api_root', $json['type']);
+        $this->assertEquals(Message::TYPE_ROOT, $json['type']);
         $this->assertArrayHasKey('auth', $json);
         $this->assertArrayHasKey('service', $json);
         $this->assertArrayHasKey('route', $json);

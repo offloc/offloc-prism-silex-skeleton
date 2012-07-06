@@ -11,6 +11,7 @@
 
 namespace Offloc\Router\WebApp\Api\Controller;
 
+use Offloc\Router\Api\Common\Message;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -31,7 +32,7 @@ class RouteControllerTest extends AbstractControllerTest
 
         $this->assertTrue($response->isOk());
         $this->assertEquals('application/json', $response->headers->get('content-type'));
-        $this->assertEquals('offloc_router_api_route_root', $json['type']);
+        $this->assertEquals(Message::TYPE_ROUTE_ROOT, $json['type']);
         $this->assertArrayHasKey('create', $json);
         $this->assertArrayHasKey('find', $json);
     }
@@ -74,15 +75,19 @@ class RouteControllerTest extends AbstractControllerTest
 
         $json = json_decode($response->getContent(), true);
 
-        $this->assertTrue($response->isOk());
+        $this->assertEquals(303, $response->getStatusCode());
         $this->assertEquals('application/json', $response->headers->get('content-type'));
-        $this->assertEquals('offloc_router_api_route_find', $json['type']);
+        $this->assertEquals(Message::TYPE_ROUTE_LINK, $json['type']);
         $this->assertArrayHasKey('link', $json);
+        $this->assertEquals($json['link'], $response->headers->get('location'));
 
         $client->request('GET', $json['link']);
         $response = $client->getResponse();
 
         $json = json_decode($response->getContent(), true);
+        $this->assertTrue($response->isOk());
+        $this->assertEquals('application/json', $response->headers->get('content-type'));
+        $this->assertEquals(Message::TYPE_ROUTE_DETAIL, $json['type']);
         $this->assertEquals('http://example.com', $json['target']);
         $this->assertEquals('Some Name', $json['name']);
         $this->assertEquals('asdf', $json['id']);
@@ -162,15 +167,19 @@ class RouteControllerTest extends AbstractControllerTest
 
         $json = json_decode($response->getContent(), true);
 
-        $this->assertTrue($response->isOk());
+        $this->assertEquals(201, $response->getStatusCode());
         $this->assertEquals('application/json', $response->headers->get('content-type'));
-        $this->assertEquals('offloc_router_api_route_create', $json['type']);
+        $this->assertEquals(Message::TYPE_ROUTE_LINK, $json['type']);
         $this->assertArrayHasKey('link', $json);
+        $this->assertEquals($json['link'], $response->headers->get('location'));
 
         $client->request('GET', $json['link']);
         $response = $client->getResponse();
 
         $json = json_decode($response->getContent(), true);
+        $this->assertTrue($response->isOk());
+        $this->assertEquals('application/json', $response->headers->get('content-type'));
+        $this->assertEquals(Message::TYPE_ROUTE_DETAIL, $json['type']);
         $this->assertEquals('http://example.com', $json['target']);
         $this->assertEquals('Some Name', $json['name']);
         $this->assertEquals('asdf', $json['id']);

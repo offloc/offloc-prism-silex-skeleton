@@ -11,6 +11,7 @@
 
 namespace Offloc\Router\WebApp\Api\Controller;
 
+use Offloc\Router\Api\Common\Message;
 use Offloc\Router\WebApp\Api\ApiControllerProvider;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -29,7 +30,7 @@ class RouteController extends AbstractController
     public function rootAction()
     {
         return $this->app->json(array(
-            'type' => 'offloc_router_api_route_root',
+            'type' => Message::TYPE_ROUTE_ROOT,
             'create' => $this->generateUrl(ApiControllerProvider::ROUTE_ROUTE_CREATE),
             'find' => $this->generateUrl(ApiControllerProvider::ROUTE_ROUTE_FIND),
         ));
@@ -56,13 +57,15 @@ class RouteController extends AbstractController
 
             $route = $this->routeFactory()->create($service, $target, $name, $id, $headers);
 
+            $routeLink = $this->generateRouteUrl($route);
+
             return $this->app->json(array(
-                'type' => 'offloc_router_api_route_create',
-                'link' => $this->generateRouteUrl($route),
-            ));
+                'type' => Message::TYPE_ROUTE_LINK,
+                'link' => $routeLink,
+            ), 201, array('Location' => $routeLink,));
         } catch (\Exception $e) {
             return $this->app->json(array(
-                'type' => 'error',
+                'type' => Message::TYPE_ERROR,
                 'message' => $e->getMessage(),
             ), 501);
         }
@@ -79,10 +82,12 @@ class RouteController extends AbstractController
     {
         $route = $this->routeRepository()->find($request->request->get('id'));
 
+        $routeLink = $this->generateRouteUrl($route);
+
         return $this->app->json(array(
-            'type' => 'offloc_router_api_route_find',
-            'link' => $this->generateRouteUrl($route),
-        ));
+            'type' => Message::TYPE_ROUTE_LINK,
+            'link' => $routeLink,
+        ), 303, array('Location' => $routeLink,));
     }
 
     /**
@@ -98,7 +103,7 @@ class RouteController extends AbstractController
         $route = $this->routeRepository()->find($routeId);
 
         return $this->app->json(array(
-            'type' => 'offloc_router_api_route_detail',
+            'type' => Message::TYPE_ROUTE_DETAIL,
             'link' => $this->generateRouteUrl($route),
             'id' => $route->id(),
             'target' => $route->target(),

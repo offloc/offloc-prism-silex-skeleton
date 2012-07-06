@@ -11,6 +11,7 @@
 
 namespace Offloc\Router\WebApp\Api\Controller;
 
+use Offloc\Router\Api\Common\Message;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -31,7 +32,7 @@ class ServiceControllerTest extends AbstractControllerTest
 
         $this->assertTrue($response->isOk());
         $this->assertEquals('application/json', $response->headers->get('content-type'));
-        $this->assertEquals('service_root', $json['type']);
+        $this->assertEquals(Message::TYPE_SERVICE_ROOT, $json['type']);
         $this->assertArrayHasKey('create', $json);
         $this->assertArrayHasKey('find', $json);
     }
@@ -73,16 +74,18 @@ class ServiceControllerTest extends AbstractControllerTest
 
         $json = json_decode($response->getContent(), true);
 
-        $this->assertTrue($response->isOk());
+        $this->assertEquals(303, $response->getStatusCode());
         $this->assertEquals('application/json', $response->headers->get('content-type'));
-        $this->assertEquals('service_link', $json['type']);
+        $this->assertEquals(Message::TYPE_SERVICE_LINK, $json['type']);
         $this->assertArrayHasKey('link', $json);
 
         $client->request('GET', $json['link']);
         $response = $client->getResponse();
 
         $json = json_decode($response->getContent(), true);
-        $this->assertEquals('service_detail', $json['type']);
+        $this->assertTrue($response->isOk());
+        $this->assertEquals('application/json', $response->headers->get('content-type'));
+        $this->assertEquals(Message::TYPE_SERVICE_DETAIL, $json['type']);
         $this->assertEquals('some key', $json['key']);
         $this->assertEquals('Some Name', $json['name']);
         $this->assertEquals('http://example.com', $json['url']);

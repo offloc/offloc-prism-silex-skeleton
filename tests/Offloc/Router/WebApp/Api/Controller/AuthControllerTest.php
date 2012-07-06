@@ -11,6 +11,7 @@
 
 namespace Offloc\Router\WebApp\Api\Controller;
 
+use Offloc\Router\Api\Common\Message;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -31,7 +32,7 @@ class AuthControllerTest extends AbstractControllerTest
 
         $this->assertTrue($response->isOk());
         $this->assertEquals('application/json', $response->headers->get('content-type'));
-        $this->assertEquals('offloc_router_api_auth_root', $json['type']);
+        $this->assertEquals(Message::TYPE_AUTH_ROOT, $json['type']);
         $this->assertArrayHasKey('authenticate', $json);
     }
 
@@ -72,10 +73,11 @@ class AuthControllerTest extends AbstractControllerTest
 
         $json = json_decode($response->getContent(), true);
 
-        $this->assertTrue($response->isOk());
+        $this->assertEquals(303, $response->getStatusCode());
         $this->assertEquals('application/json', $response->headers->get('content-type'));
-        $this->assertEquals('offloc_router_api_auth_authenticate', $json['type']);
+        $this->assertEquals(Message::TYPE_SERVICE_LINK, $json['type']);
         $this->assertArrayHasKey('link', $json);
+        $this->assertEquals($json['link'], $response->headers->get('location'));
 
         $client->request('GET', $json['link']);
         $response = $client->getResponse();
@@ -84,7 +86,7 @@ class AuthControllerTest extends AbstractControllerTest
 
         $this->assertTrue($response->isOk());
         $this->assertEquals('application/json', $response->headers->get('content-type'));
-        $this->assertEquals('service_detail', $json['type']);
+        $this->assertEquals(Message::TYPE_SERVICE_DETAIL, $json['type']);
         $this->assertEquals('service key', $json['key']);
     }
 }
