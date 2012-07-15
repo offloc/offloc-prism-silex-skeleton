@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is a part of offloc/router-core.
+ * This file is a part of offloc/router-api-controllers.
  *
  * (c) Offloc Incorporated
  *
