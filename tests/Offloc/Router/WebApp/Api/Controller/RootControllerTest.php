@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is a part of offloc/router-api-controllers.
+ * This file is a part of offloc/router-silex-app.
  *
  * (c) Offloc Incorporated
  *
