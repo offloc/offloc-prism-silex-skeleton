@@ -1,4 +1,4 @@
-offloc-router-api-controllers
-=============================
+offloc-router-silex-app
+=======================
 
-Offloc Router — API Controllers
+Offloc Router Silex Application
