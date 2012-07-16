@@ -1,9 +1,8 @@
 {
-    "name": "offloc/router-api-controllers",
-    "type": "library",
-    "description": "Provides the API Controllers for the Offloc router",
-    "homepage": "https://github.com/offloc/offloc-router-api-controllers",
-    "keywords": ["offloc", "router", "short", "url", "api", "controller provider"],
+    "name": "offloc/router-silex-app",
+    "description": "Offloc Router Silex Application",
+    "homepage": "https://github.com/offloc/offloc-router-silex-app",
+    "keywords": ["url", "shortener"],
     "license": "MIT",
     "authors": [
         {
@@ -15,23 +14,18 @@
     "repositories": [
         {
             "type": "git",
-            "url": "git://github.com/offloc/offloc-router-core.git"
-        },
-        {
-            "type": "git",
-            "url": "git://github.com/offloc/offloc-router-api-common.git"
+            "url": "git://github.com/offloc/offloc-router.git"
         }
     ],
     "require": {
         "php": ">=5.3.2",
         "silex/silex": "1.*@dev",
-        "offloc/router-core": "1.*@dev",
-        "offloc/router-api-common": "1.*@dev"
+        "offloc/router": "1.*@dev"
     },
     "require-dev": {
-        "symfony/browser-kit": "2.1.*@dev",
-        "symfony/css-selector": "2.1.*@dev",
-        "symfony/dom-crawler": "2.1.*@dev"
+        "symfony/browser-kit": "2.1.*",
+        "symfony/css-selector": "2.1.*",
+        "symfony/dom-crawler": "2.1.*"
     },
     "autoload": {
         "psr-0": {
