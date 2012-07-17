@@ -11,14 +11,12 @@
 
 namespace Offloc\Router\WebApp;
 
-use Offloc\Router\App;
-
 /**
  * Admin App
  *
  * @author Beau Simensen <beau@dflydev.com>
  */
-class Admin extends App
+class Admin extends AbstractApp
 {
     protected function configure()
     {

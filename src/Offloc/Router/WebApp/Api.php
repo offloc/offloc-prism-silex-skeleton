@@ -11,7 +11,6 @@
 
 namespace Offloc\Router\WebApp;
 
-use Offloc\Router\App;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -19,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Beau Simensen <beau@dflydev.com>
  */
-class Api extends App
+class Api extends AbstractApp
 {
     const ROUTE_ROOT = 'offloc_router_api_root';
     const ROUTE_AUTH_ROOT = 'offloc_router_api_auth_root';

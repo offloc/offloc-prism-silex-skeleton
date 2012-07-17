@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Offloc\Router;
+namespace Offloc\Router\WebApp;
 
 use Silex\Application;
 
 /**
- * App
+ * Abstract Base App
  *
  * @author Beau Simensen <beau@dflydev.com>
  */
-class App extends Application
+abstract class AbstractApp extends Application
 {
     /**
      * Constructor
