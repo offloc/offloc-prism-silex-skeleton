@@ -13,7 +13,7 @@ namespace Offloc\Router\WebApp\Api\Controller;
 
 use Offloc\Router\Domain\Model\Route\Route;
 use Offloc\Router\Domain\Model\Service\Service;
-use Offloc\Router\WebApp\Api\ApiControllerProvider;
+use Offloc\Router\WebApp\Api;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -66,12 +66,12 @@ abstract class AbstractController
 
     protected function generateRouteUrl(Route $route)
     {
-        return $this->generateUrl(ApiControllerProvider::ROUTE_ROUTE_DETAIL, array('routeId' => $route->id()));
+        return $this->generateUrl(Api::ROUTE_ROUTE_DETAIL, array('routeId' => $route->id()));
     }
 
     protected function generateServiceUrl(Service $service)
     {
-        return $this->generateUrl(ApiControllerProvider::ROUTE_SERVICE_DETAIL, array('serviceKey' => $service->key(), ));
+        return $this->generateUrl(Api::ROUTE_SERVICE_DETAIL, array('serviceKey' => $service->key(), ));
     }
 
     protected function session()

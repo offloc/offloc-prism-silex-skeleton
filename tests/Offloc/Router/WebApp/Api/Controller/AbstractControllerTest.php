@@ -11,8 +11,8 @@
 
 namespace Offloc\Router\WebApp\Api\Controller;
 
+use Offloc\Router\WebApp\Api;
 use Offloc\Router\WebApp\Api\ApiControllerProvider;
-use Silex\Application;
 use Silex\Provider;
 use Silex\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,15 +29,9 @@ abstract class AbstractControllerTest extends WebTestCase
      */
     public function createApplication()
     {
-        $app = new Application;
-
-        $app['debug'] = true;
+        $app = new Api('test', true);
 
         unset($app['exception_handler']);
-
-        $app->register(new Provider\UrlGeneratorServiceProvider);
-
-        $app->mount('/', new ApiControllerProvider);
 
         return $app;
     }

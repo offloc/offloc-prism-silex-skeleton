@@ -12,7 +12,7 @@
 namespace Offloc\Router\WebApp\Api\Controller;
 
 use Offloc\Router\Api\Common\Message;
-use Offloc\Router\WebApp\Api\ApiControllerProvider;
+use Offloc\Router\WebApp\Api;
 
 /**
  * Defines the Root API Controller
@@ -30,9 +30,9 @@ class RootController extends AbstractController
     {
         return $this->app->json(array(
             'type' => Message::TYPE_ROOT,
-            'auth' => $this->generateUrl(ApiControllerProvider::ROUTE_AUTH_ROOT),
-            'route' => $this->generateUrl(ApiControllerProvider::ROUTE_ROUTE_ROOT),
-            'service' => $this->generateUrl(ApiControllerProvider::ROUTE_SERVICE_ROOT),
+            'auth' => $this->generateUrl(Api::ROUTE_AUTH_ROOT),
+            'route' => $this->generateUrl(Api::ROUTE_ROUTE_ROOT),
+            'service' => $this->generateUrl(Api::ROUTE_SERVICE_ROOT),
         ));
     }
 }

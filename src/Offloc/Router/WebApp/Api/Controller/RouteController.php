@@ -12,7 +12,7 @@
 namespace Offloc\Router\WebApp\Api\Controller;
 
 use Offloc\Router\Api\Common\Message;
-use Offloc\Router\WebApp\Api\ApiControllerProvider;
+use Offloc\Router\WebApp\Api;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -31,8 +31,8 @@ class RouteController extends AbstractController
     {
         return $this->app->json(array(
             'type' => Message::TYPE_ROUTE_ROOT,
-            'create' => $this->generateUrl(ApiControllerProvider::ROUTE_ROUTE_CREATE),
-            'find' => $this->generateUrl(ApiControllerProvider::ROUTE_ROUTE_FIND),
+            'create' => $this->generateUrl(Api::ROUTE_ROUTE_CREATE),
+            'find' => $this->generateUrl(Api::ROUTE_ROUTE_FIND),
         ));
     }
 

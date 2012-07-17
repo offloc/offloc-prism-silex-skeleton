@@ -29,7 +29,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Offloc\\Router\\WebApp\\Api": "src"
+            "Offloc\\Router": "src"
         }
     },
     "extra": {
