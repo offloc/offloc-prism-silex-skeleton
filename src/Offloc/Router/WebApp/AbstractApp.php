@@ -38,12 +38,11 @@ abstract class AbstractApp extends Application
 
     protected function configure()
     {
-        $projectRoot = __DIR__.'/../../..';
+
+        $app = $this;
+
+        $app['offloc.router.projectRoot'] = __DIR__.'/../../../..';
 
         $this->register(new \Silex\Provider\UrlGeneratorServiceProvider);
-
-        $this->register(new \Silex\Provider\TwigServiceProvider, array(
-            'twig.path' => $projectRoot . '/views',
-        ));
     }
 }

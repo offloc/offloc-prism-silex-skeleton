@@ -23,5 +23,11 @@ class Admin extends AbstractApp
         parent::configure();
 
         $app = $this->app;
+
+        $this->register(new \Silex\Provider\TwigServiceProvider, array(
+            'twig.path' => array(
+                __DIR__ . '/Admin/Resources/views',
+            ),
+        ));
     }
 }
