@@ -66,12 +66,12 @@ abstract class AbstractController
 
     protected function generateRouteUrl(Route $route)
     {
-        return $this->generateUrl(Api::ROUTE_ROUTE_DETAIL, array('routeId' => $route->id()));
+        return $this->generateUrl(Api::ROUTE_ROUTE_DETAIL, array('routeId' => $route->id()), true);
     }
 
     protected function generateServiceUrl(Service $service)
     {
-        return $this->generateUrl(Api::ROUTE_SERVICE_DETAIL, array('serviceKey' => $service->key(), ));
+        return $this->generateUrl(Api::ROUTE_SERVICE_DETAIL, array('serviceKey' => $service->key(), ), true);
     }
 
     protected function session()

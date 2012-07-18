@@ -30,9 +30,9 @@ class RootController extends AbstractController
     {
         return $this->app->json(array(
             'type' => Message::TYPE_ROOT,
-            'auth' => $this->generateUrl(Api::ROUTE_AUTH_ROOT),
-            'route' => $this->generateUrl(Api::ROUTE_ROUTE_ROOT),
-            'service' => $this->generateUrl(Api::ROUTE_SERVICE_ROOT),
+            'auth' => $this->generateUrl(Api::ROUTE_AUTH_ROOT, array(), true),
+            'route' => $this->generateUrl(Api::ROUTE_ROUTE_ROOT, array(), true),
+            'service' => $this->generateUrl(Api::ROUTE_SERVICE_ROOT, array(), true),
         ));
     }
 }

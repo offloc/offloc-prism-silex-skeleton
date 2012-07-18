@@ -31,8 +31,8 @@ class ServiceController extends AbstractController
     {
         return $this->app->json(array(
             'type' => Message::TYPE_SERVICE_ROOT,
-            'create' => $this->generateUrl(Api::ROUTE_SERVICE_CREATE),
-            'find' => $this->generateUrl(Api::ROUTE_SERVICE_FIND),
+            'create' => $this->generateUrl(Api::ROUTE_SERVICE_CREATE, array(), true),
+            'find' => $this->generateUrl(Api::ROUTE_SERVICE_FIND, array(), true),
         ));
     }
 

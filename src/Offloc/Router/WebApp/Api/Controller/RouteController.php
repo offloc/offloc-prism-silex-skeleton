@@ -31,8 +31,8 @@ class RouteController extends AbstractController
     {
         return $this->app->json(array(
             'type' => Message::TYPE_ROUTE_ROOT,
-            'create' => $this->generateUrl(Api::ROUTE_ROUTE_CREATE),
-            'find' => $this->generateUrl(Api::ROUTE_ROUTE_FIND),
+            'create' => $this->generateUrl(Api::ROUTE_ROUTE_CREATE, array(), true),
+            'find' => $this->generateUrl(Api::ROUTE_ROUTE_FIND, array(), true),
         ));
     }
 

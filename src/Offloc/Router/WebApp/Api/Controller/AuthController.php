@@ -31,7 +31,7 @@ class AuthController extends AbstractController
     {
         return $this->app->json(array(
             'type' => Message::TYPE_AUTH_ROOT,
-            'authenticate' => $this->generateUrl(Api::ROUTE_AUTH_AUTHENTICATE),
+            'authenticate' => $this->generateUrl(Api::ROUTE_AUTH_AUTHENTICATE, array(), true),
         ));
     }
 
