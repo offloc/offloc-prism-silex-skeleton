@@ -19,8 +19,16 @@
     ],
     "require": {
         "php": ">=5.3.2",
+        "dflydev/base32-crockford": "1.*",
+        "dflydev/identity-generator": "1.*",
+        "dflydev/identity-generator-dbal": "1.*",
+        "doctrine/orm": "2.2.*",
+        "lootils/uuid": "1.*@dev",
+        "offloc/router": "1.*@dev",
         "silex/silex": "1.*@dev",
-        "offloc/router": "1.*@dev"
+        "symfony/security": "2.1.*",
+        "symfony/twig-bridge": "2.1.*",
+        "twig/twig": "1.*"
     },
     "require-dev": {
         "symfony/browser-kit": "2.1.*",
@@ -32,6 +40,7 @@
             "Offloc\\Router\\WebApp": "src"
         }
     },
+    "bin": ["bin/admin-manager"],
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"

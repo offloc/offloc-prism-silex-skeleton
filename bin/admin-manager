@@ -1,0 +1,92 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * This file is a part of offloc/router-silex-app.
+ *
+ * (c) Offloc Incorporated
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+use Offloc\Router\WebApp\Admin;
+use Symfony\Component\Security\Core\User\User;
+
+require(__DIR__.'/../vendor/autoload.php');
+
+if (count($argv) < 2) {
+    throw new InvalidArgumentException("Usage: admin-manager [command]");
+}
+
+$app = new Admin;
+
+$users = array();
+
+if (file_exists($app['offloc.router.admin.users'])) {
+    $users = json_decode(file_get_contents($app['offloc.router.admin.users']), true);
+}
+
+switch($argv[1]) {
+    case 'list':
+        foreach ($users as $username => $info) {
+            print $username . "\n";
+        }
+
+        break;
+
+    case 'delete':
+        $username = $argv[2];
+        if (!isset($users[$username])) {
+            throw new RuntimeException(sprintf("User '%s' does not exist", $username));
+        }
+
+        unset($users[$user]);
+
+        break;
+
+    case 'update':
+        $username = $argv[2];
+        $password = $argv[3];
+
+        if (!isset($users[$username])) {
+            throw new RuntimeException(sprintf("User '%s' does not exist", $username));
+        }
+
+        $user = new User($username, $password, $users[$username]['roles']);
+
+        $encoder = $app['security.encoder_factory']->getEncoder($user);
+        $password = $encoder->encodePassword($password, $user->getSalt());
+
+        $users[$username] = array(
+            'password' => $password,
+            'roles' => $user->getRoles(),
+        );
+
+        break;
+
+    case 'create':
+        $username = $argv[2];
+        $password = $argv[3];
+
+        if (isset($users[$username])) {
+            throw new RuntimeException(sprintf("User '%s' already exists", $username));
+        }
+
+        $user = new User($username, $password, array('ROLE_SUPER_ADMIN'));
+
+        $encoder = $app['security.encoder_factory']->getEncoder($user);
+        $password = $encoder->encodePassword($password, $user->getSalt());
+
+        $users[$username] = array(
+            'password' => $password,
+            'roles' => $user->getRoles(),
+        );
+
+        break;
+
+    default:
+        throw new RuntimeException(sprintf("Invalid command '%s'", $argv[1]));
+}
+
+file_put_contents($app['offloc.router.admin.users'], json_encode($users));

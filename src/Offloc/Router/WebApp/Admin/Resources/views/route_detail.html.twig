@@ -1,0 +1,32 @@
+{% extends "layout.html.twig" %}
+{% block content %}
+
+<ul class="breadcrumb">
+  <li>
+     <a href="{{ path('offloc_router_admin_home') }}">Home</a> <span class="divider">/</span>
+  </li>
+  <li class="active">
+     <a href="{{ path('offloc_router_admin_route_detail', {routeId: route.id}) }}">Route: {{ route.id }}</a>
+  </li>
+</ul>
+
+<div class="page-header">
+  <h1>
+    Route Details
+  </h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Service</dt>
+  <dd><a href="{{ path('offloc_router_admin_service_detail', {serviceKey: route.service.key}) }}">{{ route.service.name }}</a></dd>
+  <dt>ID</dt>
+  <dd>{{ route.id }}</dd>
+  <dt>Target</dt>
+  <dd><a href="{{ route.target }}">{{ route.target }}</a></dd>
+  {% if route.name %}
+  <dt>Name</dt>
+  <dd>{{ route.name }}</dd>
+  {% endif %}
+</dl>
+
+{% endblock %}
