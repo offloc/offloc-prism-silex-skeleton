@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is a part of offloc/prism-silex-app.
+ * This file is a part of offloc/prism-silex.
  *
  * (c) Offloc Incorporated
  *
@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Offloc\Prism\WebApp\Api\Controller;
+namespace Offloc\Prism\Silex\Api\Controller;
 
-use Offloc\Prism\WebApp\Api;
-use Offloc\Prism\WebApp\Api\ApiControllerProvider;
+use Offloc\Prism\Silex\Api;
+use Offloc\Prism\Silex\Api\ApiControllerProvider;
 use Silex\Provider;
 use Silex\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;

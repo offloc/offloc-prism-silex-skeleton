@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is a part of offloc/prism-silex-app.
+ * This file is a part of offloc/prism-silex.
  *
  * (c) Offloc Incorporated
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Offloc\Prism\WebApp\Api\Controller;
+namespace Offloc\Prism\Silex\Api\Controller;
 
 use Offloc\Prism\Api\Common\Message;
 use Symfony\Component\HttpFoundation\Request;
@@ -107,7 +107,7 @@ class RouteControllerTest extends AbstractControllerTest
         );
 
         $this->app['offloc.prism.requestAuthenticator'] = $this
-            ->getMockBuilder('Offloc\Prism\WebApp\Api\RequestAuthenticator')
+            ->getMockBuilder('Offloc\Prism\Silex\Api\RequestAuthenticator')
             ->disableOriginalConstructor()
             ->getMock();
         $this->app['offloc.prism.requestAuthenticator']

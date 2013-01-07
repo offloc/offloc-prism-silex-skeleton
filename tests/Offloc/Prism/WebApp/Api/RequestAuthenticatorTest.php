@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is a part of offloc/prism-silex-app.
+ * This file is a part of offloc/prism-silex.
  *
  * (c) Offloc Incorporated
  *
@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Offloc\Prism\WebApp\Api;
+namespace Offloc\Prism\Silex\Api;
 
 use Offloc\Prism\Api\Common\Util\String;
-use Offloc\Prism\WebApp\Api\RequestAuthenticator;
+use Offloc\Prism\Silex\Api\RequestAuthenticator;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

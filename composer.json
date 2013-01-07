@@ -1,7 +1,7 @@
 {
-    "name": "offloc/prism-silex-app",
+    "name": "offloc/prism-silex",
     "description": "Offloc Prism Silex",
-    "homepage": "https://github.com/offloc/offloc-prism-silex-app",
+    "homepage": "https://github.com/offloc/offloc-prism-silex",
     "keywords": ["url", "shortener"],
     "license": "MIT",
     "authors": [
@@ -34,7 +34,7 @@
         "dflydev/psr0-resource-locator-service-provider": "1.0.*@dev",
         "dflydev/psr0-resource-locator-composer-service-provider": "1.0.*@dev",
 
-        "dflydev/composer-autoload": "1.0.*@dev",
+        "dflydev/composer-autoload": "1.0.*@alpha",
         "dflydev/psr0-resource-locator": "1.0.*@dev",
         "dflydev/psr0-resource-locator-composer": "1.0.*@dev"
     },
@@ -45,7 +45,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Offloc\\Prism\\WebApp": "src"
+            "Offloc\\Prism\\Silex": "src"
         }
     },
     "bin": ["bin/admin-manager"],

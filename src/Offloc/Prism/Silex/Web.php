@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is a part of offloc/prism-silex-app.
+ * This file is a part of offloc/prism-silex.
  *
  * (c) Offloc Incorporated
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Offloc\Prism\WebApp;
+namespace Offloc\Prism\Silex;
 
 /**
  * Web App

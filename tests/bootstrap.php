@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is a part of offloc/prism-silex-app.
+ * This file is a part of offloc/prism-silex.
  *
  * (c) Offloc Incorporated
  *
@@ -10,4 +10,4 @@
  */
 
 $loader = require __DIR__.'/../vendor/autoload.php';
-$loader->add('Offloc\\Prism\\WebApp\\Api', 'tests');
+$loader->add('Offloc\\Prism\\Silex\\Api', 'tests');
