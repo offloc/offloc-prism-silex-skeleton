@@ -1,3 +1,9 @@
+cache/
 composer.lock
+config/admin-users.json
+config/admin.users.json
+config/dev.json
+config/prod.json
+config/test.json
 dev.composer.json
 vendor

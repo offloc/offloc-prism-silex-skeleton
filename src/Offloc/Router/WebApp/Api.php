@@ -38,6 +38,10 @@ class Api extends AbstractApp
 
         $app = $this;
 
+        $app['resolver'] = $app->share($app->extend('resolver', function ($resolver, $app) {
+            return new Silex\ServiceControllerResolver($resolver, $app);
+        }));
+
         $app['offloc.router.webapp.api.controller.rootController'] = $app->share(function() use ($app) {
             return new Api\Controller\RootController($app);
         });
@@ -54,48 +58,36 @@ class Api extends AbstractApp
             return new Api\Controller\ServiceController($app);
         });
 
-        $app->get('/', function() use ($app) {
-            return $app['offloc.router.webapp.api.controller.rootController']->rootAction();
-        })->bind(self::ROUTE_ROOT);
+        $app->get('/', 'offloc.router.webapp.api.controller.rootController:rootAction')->bind(self::ROUTE_ROOT);
 
-        $app->get('/auth', function() use ($app) {
-            return $app['offloc.router.webapp.api.controller.authController']->rootAction();
-        })->bind(self::ROUTE_AUTH_ROOT);
+        $app->get('/auth', 'offloc.router.webapp.api.controller.authController:rootAction')
+            ->bind(self::ROUTE_AUTH_ROOT);
 
-        $app->post('/auth/authenticate', function(Request $request) use ($app) {
-            return $app['offloc.router.webapp.api.controller.authController']->authenticateAction($request);
-        })->bind(self::ROUTE_AUTH_AUTHENTICATE);
+        $app->post('/auth/authenticate', 'offloc.router.webapp.api.controller.authController:authenticateAction')
+            ->bind(self::ROUTE_AUTH_AUTHENTICATE);
 
-        $app->get('/route', function() use ($app) {
-            return $app['offloc.router.webapp.api.controller.routeController']->rootAction();
-        })->bind('offloc_router_api_route_root');
+        $app->get('/route', 'offloc.router.webapp.api.controller.routeController:rootAction')
+            ->bind(self::ROUTE_ROUTE_ROOT);
 
-        $app->post('/route/routes', function(Request $request) use ($app) {
-            return $app['offloc.router.webapp.api.controller.routeController']->createAction($request);
-        })->bind(self::ROUTE_ROUTE_CREATE);
+        $app->post('/route/routes', 'offloc.router.webapp.api.controller.routeController:createAction')
+            ->bind(self::ROUTE_ROUTE_CREATE);
 
-        $app->post('/route/find', function(Request $request) use ($app) {
-            return $app['offloc.router.webapp.api.controller.routeController']->findAction($request);
-        })->bind(self::ROUTE_ROUTE_FIND);
+        $app->post('/route/find', 'offloc.router.webapp.api.controller.routeController:findAction')
+            ->bind(self::ROUTE_ROUTE_FIND);
 
-        $app->get('/route/routes/{routeId}', function(Request $request, $routeId) use ($app) {
-            return $app['offloc.router.webapp.api.controller.routeController']->detailAction($request, $routeId);
-        })->bind(self::ROUTE_ROUTE_DETAIL);
+        $app->get('/route/routes/{routeId}', 'offloc.router.webapp.api.controller.routeController:detailAction')
+            ->bind(self::ROUTE_ROUTE_DETAIL);
 
-        $app->get('/service', function(Request $request) use ($app) {
-            return $app['offloc.router.webapp.api.controller.serviceController']->rootAction($request);
-        })->bind(self::ROUTE_SERVICE_ROOT);
+        $app->get('/service', 'offloc.router.webapp.api.controller.serviceController:rootAction')
+            ->bind(self::ROUTE_SERVICE_ROOT);
 
-        $app->post('/service/services', function(Request $request, $serviceKey) use ($app) {
-            return $app['offloc.router.webapp.api.controller.serviceController']->createAction($request, $serviceKey);
-        })->bind(self::ROUTE_SERVICE_CREATE);
+        $app->post('/service/services', 'offloc.router.webapp.api.controller.serviceController:createAction')
+            ->bind(self::ROUTE_SERVICE_CREATE);
 
-        $app->post('/service/find', function(Request $request) use ($app) {
-            return $app['offloc.router.webapp.api.controller.serviceController']->findAction($request);
-        })->bind(self::ROUTE_SERVICE_FIND);
+        $app->post('/service/find', 'offloc.router.webapp.api.controller.serviceController:findAction')
+            ->bind(self::ROUTE_SERVICE_FIND);
 
-        $app->get('/service/services/{serviceKey}', function(Request $request, $serviceKey) use ($app) {
-            return $app['offloc.router.webapp.api.controller.serviceController']->detailAction($request, $serviceKey);
-        })->bind(self::ROUTE_SERVICE_DETAIL);
+        $app->get('/service/services/{serviceKey}', 'offloc.router.webapp.api.controller.serviceController:detailAction')
+            ->bind(self::ROUTE_SERVICE_DETAIL);
     }
 }

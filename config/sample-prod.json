@@ -1,0 +1,6 @@
+{
+    "db.options": {
+        "driver": "pdo_sqlite",
+        "path": "/tmp/foo.db"
+    }
+}

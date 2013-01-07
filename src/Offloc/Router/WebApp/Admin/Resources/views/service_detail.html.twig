@@ -40,7 +40,12 @@
   </div>
 </div>
 
-<h2>Routes</h2>
+<div class="page-header">
+  <h1>
+    Routes
+  </h1>
+</div>
+{% if routes %}
 <table class="table">
   <thead>
     <tr>
@@ -59,6 +64,7 @@
   {% endfor %}
   </tbody>
 </table>
+{% endif %}
 
 <ul class="nav nav-pills">
   <li><a href="#" id="create-route-button">Create Route</a></li>

@@ -15,6 +15,10 @@
         {
             "type": "git",
             "url": "git://github.com/offloc/offloc-router.git"
+        },
+        {
+            "type": "git",
+            "url": "git@github.com:dflydev/dflydev-doctrine-orm-service-provider.git"
         }
     ],
     "require": {
@@ -22,13 +26,21 @@
         "dflydev/base32-crockford": "1.*",
         "dflydev/identity-generator": "1.*",
         "dflydev/identity-generator-dbal": "1.*",
-        "doctrine/orm": "2.2.*",
+        "dflydev/doctrine-orm-service-provider": "1.*@dev",
+        "doctrine/orm": ">=2.2.3,<2.4-dev",
+        "igorw/config-service-provider": "1.*",
         "lootils/uuid": "1.*@dev",
         "offloc/router": "1.*@dev",
         "silex/silex": "1.*@dev",
         "symfony/security": "2.1.*",
         "symfony/twig-bridge": "2.1.*",
-        "twig/twig": "1.*"
+        "twig/twig": "1.*",
+        "dflydev/psr0-resource-locator-service-provider": "1.0.*@dev",
+        "dflydev/psr0-resource-locator-composer-service-provider": "1.0.*@dev",
+
+        "dflydev/composer-autoload": "1.0.*@dev",
+        "dflydev/psr0-resource-locator": "1.0.*@dev",
+        "dflydev/psr0-resource-locator-composer": "1.0.*@dev"
     },
     "require-dev": {
         "symfony/browser-kit": "2.1.*",

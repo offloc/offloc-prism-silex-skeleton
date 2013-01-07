@@ -15,11 +15,11 @@ use Symfony\Component\Security\Core\User\User;
 
 require(__DIR__.'/../vendor/autoload.php');
 
-if (count($argv) < 2) {
-    throw new InvalidArgumentException("Usage: admin-manager [command]");
+if (count($argv) < 3) {
+    throw new InvalidArgumentException("Usage: admin-manager [env] [command]");
 }
 
-$app = new Admin;
+$app = new Admin($argv[1]);
 
 $users = array();
 
@@ -27,7 +27,7 @@ if (file_exists($app['offloc.router.admin.users'])) {
     $users = json_decode(file_get_contents($app['offloc.router.admin.users']), true);
 }
 
-switch($argv[1]) {
+switch($argv[2]) {
     case 'list':
         foreach ($users as $username => $info) {
             print $username . "\n";
@@ -36,7 +36,7 @@ switch($argv[1]) {
         break;
 
     case 'delete':
-        $username = $argv[2];
+        $username = $argv[3];
         if (!isset($users[$username])) {
             throw new RuntimeException(sprintf("User '%s' does not exist", $username));
         }
@@ -46,8 +46,8 @@ switch($argv[1]) {
         break;
 
     case 'update':
-        $username = $argv[2];
-        $password = $argv[3];
+        $username = $argv[3];
+        $password = $argv[4];
 
         if (!isset($users[$username])) {
             throw new RuntimeException(sprintf("User '%s' does not exist", $username));
@@ -66,8 +66,8 @@ switch($argv[1]) {
         break;
 
     case 'create':
-        $username = $argv[2];
-        $password = $argv[3];
+        $username = $argv[3];
+        $password = $argv[4];
 
         if (isset($users[$username])) {
             throw new RuntimeException(sprintf("User '%s' already exists", $username));
@@ -86,7 +86,7 @@ switch($argv[1]) {
         break;
 
     default:
-        throw new RuntimeException(sprintf("Invalid command '%s'", $argv[1]));
+        throw new RuntimeException(sprintf("Invalid command '%s'", $argv[2]));
 }
 
 file_put_contents($app['offloc.router.admin.users'], json_encode($users));

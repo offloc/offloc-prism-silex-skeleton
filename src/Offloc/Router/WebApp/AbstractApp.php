@@ -59,9 +59,18 @@ abstract class AbstractApp extends Application
 
         $app['offloc.router.projectRoot'] = __DIR__.'/../../../..';
 
+        $this->register(new \Dflydev\Silex\Provider\Psr0ResourceLocator\Psr0ResourceLocatorServiceProvider);
+        $this->register(new \Dflydev\Silex\Provider\Psr0ResourceLocator\Composer\ComposerResourceLocatorServiceProvider);
         $this->register(new \Silex\Provider\UrlGeneratorServiceProvider);
+        $app->register(new \Igorw\Silex\ConfigServiceProvider(
+            $app['offloc.router.projectRoot']."/config/".$app['env'].".json"
+        ));
 
-        $this->configureDoctrine();
+        $app->register(new \Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider);
+        $app->register(new \Silex\Provider\DoctrineServiceProvider);
+        $app->register(new Silex\Provider\DomainServiceProvider, array(
+            'offloc.router.core_domain_lib_root' => $app['offloc.router.projectRoot'].'/vendor/offloc/router',
+        ));
     }
 
     private function configureDoctrine()
