@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is a part of offloc/router-silex-app.
+ * This file is a part of offloc/prism-silex-app.
  *
  * (c) Offloc Incorporated
  *
@@ -11,5 +11,5 @@
 
 require_once('../../vendor/autoload.php');
 
-$app = new Offloc\Router\WebApp\Admin('prod', false);
+$app = new Offloc\Prism\WebApp\Admin('prod', false);
 $app->run();

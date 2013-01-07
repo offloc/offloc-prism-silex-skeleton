@@ -1,7 +1,7 @@
 {
-    "name": "offloc/router-silex-app",
-    "description": "Offloc Router Silex Application",
-    "homepage": "https://github.com/offloc/offloc-router-silex-app",
+    "name": "offloc/prism-silex-app",
+    "description": "Offloc Prism Silex",
+    "homepage": "https://github.com/offloc/offloc-prism-silex-app",
     "keywords": ["url", "shortener"],
     "license": "MIT",
     "authors": [
@@ -14,11 +14,7 @@
     "repositories": [
         {
             "type": "git",
-            "url": "git://github.com/offloc/offloc-router.git"
-        },
-        {
-            "type": "git",
-            "url": "git@github.com:dflydev/dflydev-doctrine-orm-service-provider.git"
+            "url": "git://github.com/offloc/offloc-prism.git"
         }
     ],
     "require": {
@@ -30,7 +26,7 @@
         "doctrine/orm": ">=2.2.3,<2.4-dev",
         "igorw/config-service-provider": "1.*",
         "lootils/uuid": "1.*@dev",
-        "offloc/router": "1.*@dev",
+        "offloc/prism": "1.*@dev",
         "silex/silex": "1.*@dev",
         "symfony/security": "2.1.*",
         "symfony/twig-bridge": "2.1.*",
@@ -49,7 +45,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Offloc\\Router\\WebApp": "src"
+            "Offloc\\Prism\\WebApp": "src"
         }
     },
     "bin": ["bin/admin-manager"],

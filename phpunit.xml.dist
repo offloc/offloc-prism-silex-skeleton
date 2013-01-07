@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit colors="true" bootstrap="tests/bootstrap.php">
     <testsuites>
-        <testsuite name="Offloc Router API Controllers Test Suite">
-            <directory>./tests/Offloc/Router/WebApp/Api</directory>
+        <testsuite name="Offloc Prism Silex App Test Suite">
+            <directory>./tests/Offloc/Prism/WebApp/Api</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>./src/Offloc/Router/WebApp/Api</directory>
+            <directory>./src/Offloc/Prism/WebApp/Api</directory>
         </whitelist>
     </filter>
 </phpunit>
