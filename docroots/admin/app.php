@@ -11,5 +11,5 @@
 
 require_once('../../vendor/autoload.php');
 
-$app = new Offloc\Prism\Silex\Admin('prod', false);
+$app = new Offloc\Prism\Silex\App\Admin\Admin('prod', false);
 $app->run();

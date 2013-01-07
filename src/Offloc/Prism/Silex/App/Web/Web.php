@@ -9,7 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Offloc\Prism\Silex;
+namespace Offloc\Prism\Silex\App\Web;
+
+use Offloc\Prism\Silex\App\AbstractApp;
 
 /**
  * Web App

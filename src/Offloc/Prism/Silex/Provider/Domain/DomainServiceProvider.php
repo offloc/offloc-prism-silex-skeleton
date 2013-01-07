@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Offloc\Prism\Silex\Silex\Provider;
+namespace Offloc\Prism\Silex\Provider\Domain;
 
 use Dflydev\IdentityGenerator\DataStore\Dbal\DataStore;
 use Dflydev\IdentityGenerator\Generator\Base32CrockfordGenerator;

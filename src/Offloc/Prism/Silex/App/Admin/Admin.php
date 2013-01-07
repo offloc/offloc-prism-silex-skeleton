@@ -9,8 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Offloc\Prism\Silex;
+namespace Offloc\Prism\Silex\App\Admin;
 
+use Offloc\Prism\Silex\App\AbstractApp;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\User\InMemoryUserProvider;
 
@@ -29,7 +30,7 @@ class Admin extends AbstractApp
 
         $app->register(new \Silex\Provider\TwigServiceProvider, array(
             'twig.path' => array(
-                __DIR__ . '/Admin/Resources/views',
+                __DIR__ . '/Resources/views',
             ),
         ));
 

@@ -10,4 +10,4 @@
  */
 
 $loader = require __DIR__.'/../vendor/autoload.php';
-$loader->add('Offloc\\Prism\\Silex\\Api', 'tests');
+$loader->add('Offloc\\Prism', 'tests');

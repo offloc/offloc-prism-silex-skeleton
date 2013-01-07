@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Offloc\Prism\Silex\Api;
+namespace Offloc\Prism\Silex\App\Api;
 
 use Symfony\Component\HttpFoundation\Request;
 use Offloc\Prism\Api\Common\Util\String;

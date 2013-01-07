@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Offloc\Prism\Silex\Api\Controller;
+namespace Offloc\Prism\Silex\App\Api\Controller;
 
 use Offloc\Prism\Domain\Model\Route\Route;
 use Offloc\Prism\Domain\Model\Service\Service;
-use Offloc\Prism\Silex\Api;
+use Offloc\Prism\Silex\App\Api\Api;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Offloc\Prism\Silex\Api\Controller;
+namespace Offloc\Prism\Silex\App\Api\Controller;
 
 use Offloc\Prism\Api\Common\Message;
 

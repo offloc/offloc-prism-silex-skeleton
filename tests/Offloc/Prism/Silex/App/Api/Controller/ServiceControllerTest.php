@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Offloc\Prism\Silex\Api\Controller;
+namespace Offloc\Prism\Silex\App\Api\Controller;
 
 use Offloc\Prism\Api\Common\Message;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,7 +57,7 @@ class ServiceControllerTest extends AbstractControllerTest
             ->will($this->returnValue($service));
 
         $this->app['offloc.prism.requestAuthenticator'] = $this
-            ->getMockBuilder('Offloc\Prism\Silex\Api\RequestAuthenticator')
+            ->getMockBuilder('Offloc\Prism\Silex\App\Api\RequestAuthenticator')
             ->disableOriginalConstructor()
             ->getMock();
         $this->app['offloc.prism.requestAuthenticator']

@@ -9,8 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Offloc\Prism\Silex;
+namespace Offloc\Prism\Silex\App\Api;
 
+use Offloc\Prism\Silex\App\AbstractApp;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -39,23 +40,23 @@ class Api extends AbstractApp
         $app = $this;
 
         $app['resolver'] = $app->share($app->extend('resolver', function ($resolver, $app) {
-            return new Silex\ServiceControllerResolver($resolver, $app);
+            return new \Offloc\Prism\Silex\ServiceControllerResolver($resolver, $app);
         }));
 
         $app['offloc.prism.webapp.api.controller.rootController'] = $app->share(function() use ($app) {
-            return new Api\Controller\RootController($app);
+            return new Controller\RootController($app);
         });
 
         $app['offloc.prism.webapp.api.controller.authController'] = $app->share(function() use ($app) {
-            return new Api\Controller\AuthController($app);
+            return new Controller\AuthController($app);
         });
 
         $app['offloc.prism.webapp.api.controller.routeController'] = $app->share(function() use ($app) {
-            return new Api\Controller\RouteController($app);
+            return new Controller\RouteController($app);
         });
 
         $app['offloc.prism.webapp.api.controller.serviceController'] = $app->share(function() use ($app) {
-            return new Api\Controller\ServiceController($app);
+            return new Controller\ServiceController($app);
         });
 
         $app->get('/', 'offloc.prism.webapp.api.controller.rootController:rootAction')->bind(self::ROUTE_ROOT);
