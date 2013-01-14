@@ -1,7 +1,7 @@
 {
-    "name": "offloc/prism-silex",
-    "description": "Offloc Prism Silex",
-    "homepage": "https://github.com/offloc/offloc-prism-silex",
+    "name": "offloc/prism-silex-skeleton",
+    "description": "Offloc Prism Silex Skeleton",
+    "homepage": "https://github.com/offloc/offloc-prism-silex-skeleton",
     "keywords": ["url", "shortener"],
     "license": "MIT",
     "authors": [
@@ -15,44 +15,29 @@
         {
             "type": "git",
             "url": "git://github.com/offloc/offloc-prism.git"
+        },
+        {
+            "type": "git",
+            "url": "git://github.com/offloc/offloc-prism-silex.git"
         }
     ],
     "require": {
-        "php": ">=5.3.2",
-        "dflydev/base32-crockford": "1.*",
-        "dflydev/identity-generator": "1.*",
-        "dflydev/identity-generator-dbal": "1.*",
-        "dflydev/doctrine-orm-service-provider": "1.*@dev",
-        "doctrine/orm": ">=2.2.3,<2.4-dev",
-        "igorw/config-service-provider": "1.*",
-        "lootils/uuid": "1.*@dev",
+        "php": ">=5.3.3",
         "offloc/prism": "1.*@dev",
+        "offloc/prism-silex": "1.*@dev",
+        "symfony/class-loader": "~2.1",
+
+        "dflydev/doctrine-orm-service-provider": "1.*@dev",
         "silex/silex": "1.*@dev",
-        "symfony/security": "2.1.*",
-        "symfony/twig-bridge": "2.1.*",
-        "twig/twig": "1.*",
         "dflydev/psr0-resource-locator-service-provider": "1.0.*@dev",
         "dflydev/psr0-resource-locator-composer-service-provider": "1.0.*@dev",
-
         "dflydev/composer-autoload": "1.0.*@alpha",
         "dflydev/psr0-resource-locator": "1.0.*@dev",
         "dflydev/psr0-resource-locator-composer": "1.0.*@dev"
     },
-    "require-dev": {
-        "symfony/browser-kit": "2.1.*",
-        "symfony/css-selector": "2.1.*",
-        "symfony/dom-crawler": "2.1.*"
-    },
-    "autoload": {
-        "psr-0": {
-            "Offloc\\Prism\\Silex": "src"
-        }
-    },
-    "bin": ["bin/admin-manager"],
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
         }
-    },
-    "minimum-stability": "beta"
+    }
 }
