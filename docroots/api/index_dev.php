@@ -18,7 +18,7 @@ if ('cli' !== php_sapi_name()) {
 
 $app = new Silex\Application;
 
-require __DIR__.'/../../config/dev.php';
+require __DIR__.'/../../config/bootstrap/dev.php';
 require __DIR__.'/../../src/api/webapp.php';
 require __DIR__.'/../../config/api/dev.php';
 require __DIR__.'/../../src/api/controllers.php';
