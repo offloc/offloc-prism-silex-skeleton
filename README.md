@@ -3,7 +3,7 @@ Prism Silex Skeleton
 
 A [Prism][1] [Silex][2] skeleton.
 
-Prism is a A URL Shortener and Custom Header Injector.
+Prism is a URL Shortener and Custom Header Injector.
 
 
 Requirements
@@ -14,7 +14,7 @@ Requirements
 
 Installation
 ------------
- 
+
 Through [Composer][3] as [offloc/prism-silex-skeleton][4].
 
 
