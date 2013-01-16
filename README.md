@@ -8,7 +8,7 @@ to be used as a barebones base application.
 
 The goal of this skeleton is to provide minimal boilerplate such that keeping
 an instance of Prism up to date can be done via `composer update` and requiring
-little to no tweaking of the boilerplate after updating.
+little to no tweaking of the already existing boilerplate.
 
 
 Requirements
