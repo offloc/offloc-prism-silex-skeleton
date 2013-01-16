@@ -33,7 +33,10 @@
         "dflydev/psr0-resource-locator-composer-service-provider": "1.0.*@dev",
         "dflydev/composer-autoload": "1.0.*@alpha",
         "dflydev/psr0-resource-locator": "1.0.*@dev",
-        "dflydev/psr0-resource-locator-composer": "1.0.*@dev"
+        "dflydev/psr0-resource-locator-composer": "1.0.*@dev",
+        "dflydev/theme-service-provider": "1.0.*@dev",
+        "dflydev/theme-twig-extension": "1.0.*@dev",
+        "dflydev/theme": "1.0.*@dev"
     },
     "extra": {
         "branch-alias": {
