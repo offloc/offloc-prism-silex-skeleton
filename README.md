@@ -1,9 +1,14 @@
 Prism Silex Skeleton
 ====================
 
-A [Prism][1] [Silex][2] skeleton.
+A [Silex][1] skeleton application for [Prism][2].
 
-Prism is a URL Shortener and Custom Header Injector.
+Prism is a URL Shortener and Custom Header Injector. This project is intended
+to be used as a barebones base application.
+
+The goal of this skeleton is to provide minimal boilerplate such that keeping
+an instance of Prism up to date can be done via `composer update` and requiring
+little to no tweaking of the boilerplate after updating.
 
 
 Requirements
@@ -25,7 +30,7 @@ MIT, see LICENSE.
 
 
 
-[1]: https://github.com/offloc/offloc-prism
-[2]: http://silex.sensiolabs.org/
+[1]: http://silex.sensiolabs.org/
+[2]: https://github.com/offloc/offloc-prism
 [3]: http://getcomposer.org
 [4]: https://packagist.org/packages/offloc/prism-silex-skeleton
